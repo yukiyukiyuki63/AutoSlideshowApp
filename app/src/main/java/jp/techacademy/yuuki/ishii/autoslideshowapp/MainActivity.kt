@@ -112,6 +112,8 @@ class MainActivity : AppCompatActivity() {
         }
         //時間のロジックを利用
         reset_button.setOnClickListener{
+            start_button.isClickable = false//レビュー後修正
+            back_button.isClickable = false//レビュー後修正
             if(mTimer == null){
                 mTimer = Timer()
                 mTimer!!.schedule(object : TimerTask() {
@@ -124,6 +126,7 @@ class MainActivity : AppCompatActivity() {
                                 val imageUri =
                                     ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
                                 imageView.setImageURI(imageUri)
+                                reset_button.text = "停止"//レビュー後修正
                             }
                             else {
                                 if (cursor.moveToFirst()){
@@ -141,6 +144,9 @@ class MainActivity : AppCompatActivity() {
             } else {
                 mTimer!!.cancel()
                 mTimer = null
+                reset_button.text = "再生" //レビュー後修正
+                start_button.isClickable = true//レビュー後修正
+                back_button.isClickable = true//レビュー後修正
             }
         }
 //        cursor.close()
